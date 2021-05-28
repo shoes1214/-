@@ -89,6 +89,7 @@
                 <img src="./images/03.jpg" alt="">
                 <img src="./images/04.jpg" alt="">
                 <img src="./images/05.jpg" alt="">
+                <img src="./images/01.jpg" alt="">
             </div>
 
             <p class="left">&lt;</p>
@@ -107,6 +108,54 @@
         /* 
         需求1：图片每3s自动切换
          */
+
+        /* 
+        1.获取inner
+        2.清除定时器
+        3.设置定时器
+        4.定时器回调中使用动画分40步
+        5.回调函数设置临界值，当滚动条到第六张图片的位置后，下一次轮播的瞬间跳转到第一张
+         */
+
+         let inner=document.querySelector(".inner")
+         let imgs=document.querySelectorAll(".con img")
+         let timer=null
+         let num=0//初始化一个变量来记录当前走到图片的下标
+
+         //封装一个自动走的函数
+         function automove(){
+                clearInterval(timer)
+             let start=inner.scrollLeft//开始位置
+             let end=num*imgs[0].offsetWidth//结束位置
+             let step=0//开始步数
+             let step1=40//结束步数
+             let move=(end-start)/step1//每次走的距离
+
+            timer=setInterval(()=>{
+                step++
+                if(step>=step1){
+                    clearInterval(timer)
+                }
+                start+=move
+                inner.scrollLeft=start
+            },20)
+            }
+
+         setInterval(()=>{
+             num++
+            if(num>=imgs.length){
+                num=1
+                inner.scrollLeft=0
+                
+                
+            }
+
+            automove()
+
+
+         },3000)
+
+
     </script>
 </body>
 </html>
