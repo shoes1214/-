@@ -121,7 +121,7 @@
         let inner = document.querySelector(".inner")
         let imgs = document.querySelectorAll(".con img")
         let timer = null
-        let timer1=null
+        let timer1 = null
         let num = 0 //初始化一个变量来记录当前走到图片的下标
 
         //封装一个动画函数
@@ -144,57 +144,80 @@
         }
 
         //定时器，控制3s走一次,封装为一个自动走的函数
-        function automove(){ 
-            timer1=setInterval(() => {
-            num++
-            if (num >= imgs.length) {
-                num = 1
-                inner.scrollLeft = 0
+        function automove() {
+            timer1 = setInterval(() => {
+                num++
+                if (num >= imgs.length) {
+                    num = 1
+                    inner.scrollLeft = 0
 
 
-            }
+                }
 
-            movea()
+                movea()
 
 
-        }, 3000)}
-       
+            }, 3000)
+        }
+
         automove()
         /* 
         功能2：点击左右箭头，每次点击往一个方向轮播一张
         */
-       /* 
-       1.获取箭头
-       2.设置点击事件
-       3.清除定时器timer1
-       4.点击事件回调函数中，通过num的加减来控制图片的轮播
-       5.设置临界事件，左右
+        /* 
+        1.获取箭头
+        2.设置点击事件
+        3.清除定时器timer1
+        4.点击事件回调函数中，通过num的加减来控制图片的轮播
+        5.设置临界事件，左右
 
-       */
+        */
 
-       let toleft=document.querySelector(".left")
-       let toright=document.querySelector(".right")
+        let toleft = document.querySelector(".left")
+        let toright = document.querySelector(".right")
 
-       toleft.onclick=function(){
-           clearInterval(timer1)
-           num--
-           if(num<0){
-            num =imgs.length-2
-            inner.scrollLeft =  (imgs.length-1) * imgs[0].offsetWidth
-           }
-           movea()
-           automove()
-       }
-       toright.onclick=function(){
-           clearInterval(timer1)
-           num++
-           if (num >= imgs.length) {
+
+
+
+        toleft.onclick = function () {
+            clearInterval(timer1)
+            num--
+            if (num < 0) {
+                num = imgs.length - 2
+                inner.scrollLeft = (imgs.length - 1) * imgs[0].offsetWidth
+            }
+            movea()
+            automove()
+        }
+        toright.onclick = function () {
+            clearInterval(timer1)
+            num++
+            if (num >= imgs.length) {
                 num = 1
                 inner.scrollLeft = 0
- }
-           movea()
-           automove()
-       }
+            }
+            movea()
+            automove()
+        }
+
+        /* 
+        需求3：点击li，切换图片轮播
+        */
+        /* 
+        1.获取li
+        2.设置点击事件
+        3.获取当前li的下标
+        4.把下标赋值给num
+        5.调用movea函数，使其有动画
+        */
+        let lis = document.querySelectorAll(".list li")
+        lis.forEach((item, index) => {
+           
+            item.onclick=function(){
+               num=index
+               movea()
+            }
+        })
     </script>
 </body>
 
