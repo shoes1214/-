@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <script>
+        
+        /* 
+        节流：一段时间内只执行第一次
+        1.将核心代码封装
+        2.封装节流函数
+        3.初始化上次时间last
+        4.获取现在的时间戳now
+        5.相减的值用来判断是否满足时间条件
+        6.执行核心代码
+        7.将这次时间设置给上次时间
+        */
+        function dy(){
+            console.log(1)
+        }
+        var last=0
+        function throttle(fn,time){
+            
+            var now=Date.now()
+            if(now-last<time){
+                return
+            }
+            console.log(now)
+            fn()
+            last=now
+        }
+        let btn=document.getElementById("btn")
+        btn.onclick=function(){throttle(dy,1000)}
+        
+    </script>
+</body>
+</html>

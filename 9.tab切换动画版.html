@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #box {
+            margin: 0 auto;
+            border: 1px solid green;
+            width: 300px;
+            box-sizing: border-box;
+        }
+
+        #title {
+            width: 300px;
+            display: flex;
+        }
+
+        #title li {
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            border: 1px solid green;
+            box-sizing: border-box;
+        }
+
+        .active {
+            background-color: firebrick;
+        }
+
+        #con {
+            width: 300px;
+            height: 100px;
+            overflow: auto;
+            position: relative;
+        }
+
+        #con li {
+            width: 300px;
+            position: absolute;
+            height: 100px;
+            line-height: 100px;
+
+        }
+
+        #con li:nth-of-type(1) {
+            background-color: darkmagenta;
+
+        }
+
+        #con li:nth-of-type(2) {
+            background-color: darksalmon;
+            top: 100px
+        }
+
+        #con li:nth-of-type(3) {
+            background-color: gold;
+            top: 200px
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul id="title">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <ul id="con">
+            <li class="show">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+
+        <script>
+            /* 
+            需求：点击title的li，滚到con对应下标的li
+             */
+
+            /* 
+            1.获取title的li绑定点击事件
+            2.遍历清除每个li上的类
+            3.点击的li添加类
+            4.获取点击的下标
+            5.根据下标对应的con里的li，获取top的值
+            6.初始化一个动画 4个要素 初始位置 结束位置 开始步数 结束步数
+            
+             */
+
+            var obox = document.getElementById("title")
+            var oli = obox.getElementsByTagName("li")
+            var ocon = document.getElementById("con")
+            var olis = ocon.getElementsByTagName("li")
+            let timer=null
+            for (let i = 0; i < oli.length; i++) {
+                oli[i].onclick = function () {
+                    clearInterval(timer)
+                    for (let i = 0; i < oli.length; i++) {
+                        if (oli[i] === this) {
+                            oli[i].classList.add("active")
+                            /* 
+                            插入动画
+                            初始位置
+                            结束位置
+                            初始步数
+                            结束步数
+                            */
+                            let start = ocon.scrollTop
+                            let end = i * olis[0].offsetHeight
+                            let step1 = 0
+                            let step2 = 30
+                            //每一步走的距离
+                            
+                            let go = (end - start) / step2
+
+                          
+                               
+                               timer= setInterval(() => {
+                                step1++ 
+                                if(step2>=step1){start+=go}
+                                else{clearInterval(timer)}
+                               
+                                ocon.scrollTop=start
+                               
+                                }, 10);
+                                
+                                console.log(ocon.scrollTop)
+                               
+                                
+                         
+
+                           
+
+                        } else {
+                            oli[i].classList.remove("active")
+                        }
+                    }
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</html>

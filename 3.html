@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      /*   this.b="2"
+        function abc(){
+            let b=1;b++;
+            setTimeout(()=>{
+                test("fun test")
+            },0)
+            setTimeout((test("test fun")),1000)
+            console.log(b)
+            function tset(str){
+                this.b++
+                console.log(str)
+            console.log(this.b++)
+            }
+           
+        }
+        abc() */
+       /*  var a=1
+        if(true){
+            console.log(a)
+            let a=2
+        } */
+       /*  (function(){
+            var obja=Object.create({foo:"foo"})
+            var objb=obja
+            objb.foo="bar"
+            delete obja.foo
+            console.log(obja.foo)
+            console.log(objb.foo)
+        }()) */
+       /*  var arr1=[]
+        var arr2=new Array(100)
+        var arr3=new Array(['1','2','3',4,5.6])
+        console.log(arr1)
+        console.log(arr2)
+        console.log(arr3)
+        console.log(arr3.length) */
+
+        /* const promise=new Promise((resolve,reject)=>{
+            console.log(1)
+            reject(2)
+            console.log(3)
+        })
+        promise.then(res=>{
+            console.log("resolve",res)
+        })
+        .catch(err=>{
+            console.log("reject",err)
+        })
+        console.log(4) */
+
+      /*   var f=true
+        if(f===true){
+            var a=10
+        }
+        function fn(){
+             var b=20; 
+            c=30
+        }
+        fn()
+        console.log(a)
+        console.log(b) 
+        console.log(c) */
+
+       /*  var a=10
+        a.pro=10
+        console.log(a.pro+a)
+
+        var s="hello"
+        s.pro="world"
+        console.log(s.pro+s) */
+
+        /* console.log(typeof fn)
+        function fn(){}
+        var fn */
+
+       /*  setTimeout(() => {
+            console.log(1)
+        }, 2000);
+        var time=Date.now()
+        while(Date.now()-time<5000){} */
+       /*  for(let i=1;i<=3;i++){
+            setTimeout(() => {
+                console.log(i)
+            }, 0);
+        } */
+      /*   var name="world";
+        (function(){
+            if(typeof name==="undefined"){
+                var name ="jack"
+                console.log("goodbye"+name)
+            }else{
+                console.log("hello"+name)
+            }
+        })() */
+        /* const num={
+            a:10,
+            add(){return this.a+2},
+            reduce:()=>this.a-2
+        }
+        console.log(num.add())
+        console.log(num.reduce()) */
+        /* function foo(){
+            let map={
+                fn:function(){
+                    console.log(this)
+                }
+            }
+            let fn=map.fn
+            fn()
+        }
+        foo() */
+        const promise1 = new Promise((resolve, reject) => {
+  console.log('promise1')
+})
+console.log('1', promise1);
+    </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .outer {
+            width: 600px;
+            margin: 0 auto;
+            border: 1px solid #000;
+            display: flex;
+        }
+
+        #left {
+            width: 200px;
+            height: 300px;
+            background-color: hotpink;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        #change {
+            width: 200px;
+            height: 300px;
+            background-color: lawngreen;
+        }
+
+        #change button {
+            display: block;
+            width: 100%;
+            margin: 30px 0;
+        }
+
+        #right {
+            width: 200px;
+            height: 300px;
+            background-color: hotpink;
+            line-height: 20px;
+            text-align: center;
+        }
+        .choose{
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <div id="left">
+            <p>left的con1</p>
+            <p>left的con2</p>
+            <p>left的con3</p>
+            <p>left的con4</p>
+        </div>
+        <div id="change">
+            <button id="toRight">&gt;&gt;&gt;&gt;</button>
+            <button id="toLeft">&lt;&lt;&lt;&lt;</button>
+        </div>
+        <div id="right">
+            <p>right的con1</p>
+            <p>right的con2</p>
+            <p>right的con3</p>
+            <p>right的con4</p>
+        </div>
+    </div>
+    <script>
+       /*  var oLeft = document.getElementById('left');
+        var oChange = document.getElementById('change');
+        var oRight = document.getElementById('right');
+        var oLeftPs = oLeft.getElementsByTagName("p");
+        var oRightPs = oRight.getElementsByTagName("p");
+        var oToLeft = document.getElementById('toLeft');
+        var oToRight = document.getElementById('toRight'); */
+
+       /* 
+       需求：点击left中的p或者right中的p，p的背景颜色变红，点击按钮，选中的p跑到另一半
+        */
+        /* 
+        1.遍历左边获取所有p
+        2.父元素绑定点击事件（事件委托）
+        3.给点击的元素添加类名
+        4.按钮绑定点击事件
+        5.点击事件函数：找到有类名的p，插入右边的div中，去除类名
+         */
+      /*    oLeft.onclick=function(e){
+             e.target.classList.add("choose")
+         }
+         
+         oToRight.onclick=function(){
+                for(var i=0;i<oLeftPs.length;i++){
+                    if(oLeftPs[i].className==="choose"){
+                        oLeftPs[i].classList.remove("choose")
+                        oRight.appendChild(oLeftPs[i]) 
+                        i--
+                    }
+                }
+             }
+             
+             oRight.onclick=function(e){
+             e.target.classList.add("choose")
+            }
+            oToLeft.onclick=function(){
+                for(var i=0;i<oLeftPs.length;i++){
+                    if(oRightPs[i].className==="choose"){
+                        oRightPs[i].classList.remove("choose")
+                        oLeft.appendChild(oRightPs[i]) 
+                        i--
+                    }
+                }
+             } */
+
+
+
+        var oLeft = document.getElementById('left');
+        var oChange = document.getElementById('change');
+        var oRight = document.getElementById('right');
+        var oLeftPs = oLeft.querySelectorAll("p");
+        var oRightPs = oRight.querySelectorAll("p");
+        var oToLeft = document.getElementById('toLeft');
+        var oToRight = document.getElementById('toRight');
+
+        oLeft.onclick=function(e){
+             e.target.classList.add("choose")
+         }
+         oRight.onclick=function(e){
+             e.target.classList.add("choose")
+            }
+            /* 
+        1.遍历左边获取所有p
+        2.父元素绑定点击事件（事件委托）
+        3.给点击的元素添加类名
+        4.按钮绑定点击事件
+        5.点击事件函数：找到有类名的p，插入右边的div中，去除类名
+         */
+         oToRight .onclick=function(){
+            oLeftPs.forEach(function(item,index){
+                if(item.className==="choose"){
+                    item.classList.remove("choose")
+                    oRight.appendChild(item)
+                }
+            })
+         }
+         oToLeft .onclick=function(){
+            oRightPs.forEach(function(item,index){
+                if(item.className==="choose"){
+                    item.classList.remove("choose")
+                    oLeft.appendChild(item)
+                }
+            })
+         }
+    </script>
+</body>
+
+</html>

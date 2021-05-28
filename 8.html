@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [1, 2, 3, 1, 2, 3, 4, 2, 1, 23, 4, 3, 2];
+        /* 
+        需求：统计数组出现最多的数字，以对象的键值对形式表现
+        */
+        let obj = {}
+        arr.forEach((item, index) => {
+            if (obj[item]) {
+                obj[item]++
+            } else {
+                obj[item] = 1
+            }
+        })
+
+        // 将m1转为Map对象
+        let m1 = new Map(Object.entries(obj));
+        console.log(m1)
+        // 获取Map对象中键值组成的迭代器对象
+        let iteValues = m1.values();
+        console.log(iteValues)
+
+        // 使用扩展运算符转为数组
+        let valuesArr = [...iteValues];
+        // 解构数组，获得最大值
+        let max = Math.max(...valuesArr);
+
+        // 遍历匹配输出
+        m1.forEach((value, key) => {
+            if (value === max) {
+                console.log(key + ' : ' + value);
+            }
+        })
+    </script>
+</body>
+
+</html>

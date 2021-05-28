@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+        instanceof:
+        a instanceof b:判断a的隐式原型在不在b的显示原型上,返回布尔值
+        获取a的隐式原型，b的显示原型
+      
+        
+        */
+       function myinstanceof(a,b){
+            var _a=a.__proto__//获取a的隐式原型，b的显示原型
+            var _b=b.prototype//不变的
+
+            while(_a){ // 判断a的隐式原型在原型链上走到哪了
+                if(_a===_b){
+                    return true
+                }else{
+                    _a=_a.__proto__
+                }
+            }
+            return false
+       }
+       var fn=function(){}
+      console.log(myinstanceof(fn,Function)) 
+      console.log(myinstanceof(fn,Array)) 
+    </script>
+</body>
+</html>

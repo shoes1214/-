@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box{
+            margin: 0 auto;
+            border: 1px solid green;
+            width:300px;
+            box-sizing: border-box;
+        }
+        #title{
+            width:300px;
+            display: flex;
+        }
+        #title li{
+            width:100px;
+            height:50px;
+            line-height: 50px;
+            border: 1px solid green;
+            box-sizing: border-box;
+        }
+       .active{
+           background-color: firebrick;
+       }
+       #con{
+           width:300px;
+           height:100px;
+           overflow: hidden;
+       }
+        #con li{
+            width:300px;
+            float: left;
+            height: 100px;
+            line-height: 100px;
+            display: none;
+        }
+        #con li.show{
+            display: block;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul id="title">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <ul id="con">
+            <li class="show">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+
+        <script>
+            /* 
+            需求：点击title的li，显示con对应下标的li
+             */
+
+             /* 
+             1.获取title的li绑定点击事件
+             2.遍历清除每个li上的类
+             3.点击的li添加类，con对应下标的li添加类
+              */
+
+              var obox=document.getElementById("title")
+              var oli=obox.getElementsByTagName("li")
+              var ocon=document.getElementById("con")
+              var olis=ocon.getElementsByTagName("li")
+             
+             /* for(var i=0;i<oli.length;i++){
+                  oli[i].onclick=function(){
+                      console.log(oli)
+                      console.log(olis)
+                      for(var i=0;i<oli.length;i++){
+                          if(oli[i]===this){
+                              oli[i].classList.add("active")
+                              olis[i].classList.add("show")
+                          }else{
+                            oli[i].classList.remove("active")
+                            olis[i].classList.remove("show")
+                          }
+                      }
+                  }
+              } */
+             /* 
+             1.获取title的li绑定点击事件
+             2.遍历清除每个li上的类
+             3.点击的li添加类，con对应下标的li添加类
+             */
+            /*  for(var i=0;i<oli.length;i++){
+                 oli[i].index=i
+                 oli[i].onclick=function(){
+                     for(var i=0;i<oli.length;i++){
+                        oli[i].classList.remove("active")
+                        olis[i].classList.remove("show")
+                     }
+                     this.classList.add("active")
+                     olis[this.index].classList.add("show")
+                 }
+             } */
+
+             /* 
+             使用let写法
+              */
+              for(let i=0;i<oli.length;i++){
+                  let index=i
+                  oli[i].onclick=function(){
+                      for(let i=0;i<oli.length;i++){
+                        oli[i].classList.remove("active")
+                        olis[i].classList.remove("show")
+                      }
+                      this.classList.add("active")
+                      olis[index].classList.add("show")
+                  }
+              }
+        </script>
+    </div>
+</body>
+</html>

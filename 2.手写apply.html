@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        Function.prototype.myapply=function(a){
+            if(a===null||a===undefined){
+                a=window
+            }
+            if(typeof a!=="object"&&typeof a!=="function"){
+                a=Object(a)
+            }
+
+            let time=Date.now().toString(36)
+            var arg=Array.from(arguments).slice(1)
+            a[time]=this
+            eval("a[time]("+arg+")")
+            delete a[time]
+        }
+        function fn(a,b){
+            console.log(a+b)
+            console.log(this)
+        }
+        fn.myapply(1,[1,2])
+        fn.apply(1,[1,2])
+    </script>
+</body>
+</html>
