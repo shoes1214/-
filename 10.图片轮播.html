@@ -155,7 +155,7 @@
                 }
 
                 movea()
-
+                point()
 
             }, 3000)
         }
@@ -188,6 +188,7 @@
             }
             movea()
             automove()
+            point()
         }
         toright.onclick = function () {
             clearInterval(timer1)
@@ -198,6 +199,7 @@
             }
             movea()
             automove()
+            point()
         }
 
         /* 
@@ -212,12 +214,28 @@
         */
         let lis = document.querySelectorAll(".list li")
         lis.forEach((item, index) => {
-           
-            item.onclick=function(){
-               num=index
-               movea()
+
+            item.onclick = function () {
+                clearInterval(timer1)
+                num = index
+                movea()
+                point()
+                automove()
             }
         })
+        /* 
+        需求4：li随着图片的切换改变样式，即变白
+        */
+       /* 
+       1.active添加到num所对应的li上
+       2.临界值:当num为5时，active添加到第0
+       */
+      function point(){
+          lis.forEach((item,index)=>{
+              item.classList.remove("active")
+          })
+          num===5?lis[0].classList.add("active"):lis[num].classList.add("active")
+      }
     </script>
 </body>
 
