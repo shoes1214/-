@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-   
+
     <style>
         * {
             margin: 0;
@@ -117,45 +118,84 @@
         5.回调函数设置临界值，当滚动条到第六张图片的位置后，下一次轮播的瞬间跳转到第一张
          */
 
-         let inner=document.querySelector(".inner")
-         let imgs=document.querySelectorAll(".con img")
-         let timer=null
-         let num=0//初始化一个变量来记录当前走到图片的下标
+        let inner = document.querySelector(".inner")
+        let imgs = document.querySelectorAll(".con img")
+        let timer = null
+        let timer1=null
+        let num = 0 //初始化一个变量来记录当前走到图片的下标
 
-         //封装一个自动走的函数
-         function automove(){
-                clearInterval(timer)
-             let start=inner.scrollLeft//开始位置
-             let end=num*imgs[0].offsetWidth//结束位置
-             let step=0//开始步数
-             let step1=40//结束步数
-             let move=(end-start)/step1//每次走的距离
+        //封装一个动画函数
+        function movea() {
+            clearInterval(timer)
+            let start = inner.scrollLeft //开始位置
+            let end = num * imgs[0].offsetWidth //结束位置
+            let step = 0 //开始步数
+            let step1 = 40 //结束步数
+            let move = (end - start) / step1 //每次走的距离
 
-            timer=setInterval(()=>{
+            timer = setInterval(() => {
                 step++
-                if(step>=step1){
+                if (step >= step1) {
                     clearInterval(timer)
                 }
-                start+=move
-                inner.scrollLeft=start
-            },20)
+                start += move
+                inner.scrollLeft = start
+            }, 20)
+        }
+
+        //定时器，控制3s走一次,封装为一个自动走的函数
+        function automove(){ 
+            timer1=setInterval(() => {
+            num++
+            if (num >= imgs.length) {
+                num = 1
+                inner.scrollLeft = 0
+
+
             }
 
-         setInterval(()=>{
-             num++
-            if(num>=imgs.length){
-                num=1
-                inner.scrollLeft=0
-                
-                
-            }
-
-            automove()
+            movea()
 
 
-         },3000)
+        }, 3000)}
+       
+        automove()
+        /* 
+        功能2：点击左右箭头，每次点击往一个方向轮播一张
+        */
+       /* 
+       1.获取箭头
+       2.设置点击事件
+       3.清除定时器timer1
+       4.点击事件回调函数中，通过num的加减来控制图片的轮播
+       5.设置临界事件，左右
 
+       */
 
+       let toleft=document.querySelector(".left")
+       let toright=document.querySelector(".right")
+
+       toleft.onclick=function(){
+           clearInterval(timer1)
+           num--
+           if(num<0){
+            num =imgs.length-2
+            inner.scrollLeft =  (imgs.length-1) * imgs[0].offsetWidth
+           }
+           movea()
+           automove()
+       }
+       toright.onclick=function(){
+           clearInterval(timer1)
+           num++
+           if (num >= imgs.length) {
+                num = 1
+                inner.scrollLeft = 0
+ }
+           movea()
+           automove()
+       }
     </script>
 </body>
+
 </html>
